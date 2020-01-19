@@ -34,3 +34,7 @@ body {
     margin: 10px;
     overflow-y: auto;
 }
+
+.hiden {
+    display: none;
+}
