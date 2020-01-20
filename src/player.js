@@ -1,11 +1,12 @@
 import world from "./world";
 import * as ui from "./ui";
+import * as actions from "./actions";
 
-const actions = [
+const playerActions = [
     {
         id: "attack-action",
         name: "Атаковать",
-        commands: ["attack"],
+        commands: ["attack", "a"],
         duration: 1,
         doIt: (...args) => {
             if (!args || !args.length) {
@@ -17,8 +18,7 @@ const actions = [
                 ui.printHelpMessage("Выбранный объект не найден.");
                 return;
             }
-            const damage = world.getStat(player, "ad").value;
-            ui.printMessage(`Вы атаковали <i>${obj.name}</i> и нанесли <i>${damage}</i> ед. урона.`);
+            actions.attack(player, obj);
             world.update(1);
         },
     },
@@ -26,6 +26,7 @@ const actions = [
 
 const player = {
     id: "player",
+    groups: ["being", "player"],
     name: "Вы",
     stats: [
         {
@@ -46,7 +47,7 @@ const player = {
             name: "Простая одежда",
         },
     ],
-    actions,
+    actions: playerActions,
 };
 
 export default player;

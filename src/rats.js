@@ -1,21 +1,39 @@
+import world from "./world";
+import * as actions from "./actions";
+
+const rat1 = {
+    id: "rat-1",
+    groups: ["being", "rat"],
+    name: "Крыса побольше",
+    stats: [
+        {
+            id: "hp",
+            name: "Здоровье",
+            value: 67,
+            maxValue: 67,
+        },
+        {
+            id: "ad",
+            name: "Урон",
+            value: 4,
+        },
+    ],
+    actions: [
+        {
+            id: "attack-action",
+            name: "Атаковать",
+        },
+    ],
+    update: () => {
+        const loc = world.getObjectLocation(rat1);
+        if (loc.id == world.currentLocation.id) {
+            actions.attack(rat1, world.player);
+        }
+    }
+};
+
 export default [
-    {
-        id: "rat-1",
-        name: "Крыса побольше",
-        stats: [
-            {
-                id: "hp",
-                name: "Здоровье",
-                value: 100,
-                maxValue: 100,
-            },
-            {
-                id: "ad",
-                name: "Урон",
-                value: 10,
-            },
-        ],
-    },
+    rat1,
     {
         id: "rat-2",
         name: "Большая крыса",
@@ -23,13 +41,13 @@ export default [
             {
                 id: "hp",
                 name: "Здоровье",
-                value: 100,
-                maxValue: 100,
+                value: 55,
+                maxValue: 55,
             },
             {
                 id: "ad",
                 name: "Урон",
-                value: 10,
+                value: 3,
             },
         ],
     },
@@ -40,13 +58,13 @@ export default [
             {
                 id: "hp",
                 name: "Здоровье",
-                value: 100,
-                maxValue: 100,
+                value: 32,
+                maxValue: 32,
             },
             {
                 id: "ad",
                 name: "Урон",
-                value: 10,
+                value: 3,
             },
         ],
     },
@@ -57,13 +75,13 @@ export default [
             {
                 id: "hp",
                 name: "Здоровье",
-                value: 100,
-                maxValue: 100,
+                value: 24,
+                maxValue: 24,
             },
             {
                 id: "ad",
                 name: "Урон",
-                value: 10,
+                value: 6,
             },
         ],
     },
@@ -74,13 +92,13 @@ export default [
             {
                 id: "hp",
                 name: "Здоровье",
-                value: 100,
-                maxValue: 100,
+                value: 12,
+                maxValue: 12,
             },
             {
                 id: "ad",
                 name: "Урон",
-                value: 10,
+                value: 5,
             },
         ],
     },

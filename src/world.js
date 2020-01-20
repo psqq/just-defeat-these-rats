@@ -39,7 +39,37 @@ const world = {
         return being.stats.find(x => x.id == statId);
     },
     update: dt => {
+        for (let loc of world.locations) {
+            for (let objInLoc of world.getLocationObjects(loc)) {
+                if (objInLoc.update) {
+                    objInLoc.update(dt);
+                }
+            }
+        }
         world.time += dt;
+    },
+    getLocationObjects: function* (loc) {
+        for (let x of loc.beings) yield x;
+        for (let x of loc.items) yield x;
+    },
+    isInLocation: (obj, loc) => {
+        for (let objInLoc of world.getLocationObjects(loc)) {
+            if (obj.id === objInLoc.id) {
+                return loc;
+            }
+        }
+    },
+    getObjectLocation: obj => {
+        for (let loc of world.locations) {
+            if (world.isInLocation(obj, loc)) {
+                return loc;
+            }
+        }
+    },
+    deleteObject: obj => {
+        const loc = world.getObjectLocation(obj);
+        loc.beings = loc.beings.filter(x => x.id != obj.id);
+        loc.items = loc.items.filter(x => x.id != obj.id);
     },
 };
 

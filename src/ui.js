@@ -20,7 +20,7 @@ export function printBaseHelp() {
 /**
  * @param {string} msg 
  */
-export function printMessage(msg) {
+export function printMessage(msg, withTime = true) {
     if (world.time == lastMessageTime) {
         messageCounterInSameTime++;
     } else {
@@ -28,7 +28,11 @@ export function printMessage(msg) {
         messageCounterInSameTime = 1;
     }
     const k = messageCounterInSameTime;
-    const msgWithTime = `<div><b>[${world.time}:${k}]</b> ${msg}</div>`;
+    let msgWithTime = `${msg}`;
+    if (withTime) {
+        msgWithTime = `<b>[${world.time}:${k}]</b> ${msg}`;
+    }
+    msgWithTime = `<div>${msgWithTime}</div>`
     outputEl.innerHTML = msgWithTime + "<br>" + outputEl.innerHTML;
     lastMessageTime = world.time;
 }

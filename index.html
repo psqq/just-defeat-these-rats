@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Just defeat these rats</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./assets/style.css">
 </head>
 
 <body>
@@ -26,6 +26,8 @@
         <b>"what is there", "wit"</b> - выводит список существ и предметов в текущем месте.
         <br><br>
         <b>"i"</b> - выводит информацию о вас.
+        <br><br>
+        <b>"look at [n]", "l [n]", "l[n]"</b> - выводит информацию о выбранном существе/предмете.
     </div>
     <div class="what-is-there-template hiden">
         Существа:
@@ -37,32 +39,38 @@
         Предметы:
         <ol class="continue">
             {{#items}}
-            <li>{{name}}</li>
+            <li>{{name}} {{#quantity}}(Количество: {{quantity}}){{/quantity}}</li>
             {{/items}}
         </ol>
     </div>
-    <div class="i-template hiden">
-        Характеристики:
+    <div class="being-template hiden">
+        <p><i>{{name}}</i>:</p>
+        {{#stats.length}}
+        <p>Характеристики:</p>
         <ul>
             {{#stats}}
             <li>{{name}}: {{value}} {{#maxValue}}/ {{maxValue}}{{/maxValue}}</li>
             {{/stats}}
         </ul>
-        {{#items}}
-        Что у вас есть:
+        {{/stats.length}}
+        {{#items.length}}
+        Предметы:
         <ol>
             {{#items}}
-            <li>{{name}}</li>
+            <li>{{name}} {{#quantity}}(Количество: {{quantity}}){{/quantity}}</li>
             {{/items}}
         </ol>
-        {{/items}}
-        {{^items}}У вас ничего нет!{{/items}}
-        Что вы можете делать:
+        {{/items.length}}
+        {{^items}}<p>У <i>{{name}}</i> ничего нет.</p>{{/items}}
+        {{#actions.length}}
+        Действия:
         <ul>
             {{#actions}}
-            <li>{{name}} [{{#commands}}<b>{{.}}</b>{{/commands}}]</li>
+            <li>{{name}} {{#commands.length}}[ {{#commands}}<b> {{.}} </b> {{/commands}} ]{{/commands.length}}</li>
             {{/actions}}
         </ul>
+        {{/actions.length}}
+        {{^actions}}<p><i>{{name}}</i> ничего не может делать.</p>{{/actions}}
     </div>
     <script src="./dist/main.js"></script>
 </body>

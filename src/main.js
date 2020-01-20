@@ -12,6 +12,8 @@ ui.printMessage(`А сейчас вас окружили 5 здоровых кр
 Где? У вас дома, в подвале, откуда вы решили взять немного еды.
 Для победы просто победите их!`);
 
+ui.printMessage("<hr>", false);
+
 ui.printBaseHelp();
 
 /** @type {HTMLInputElement} */
@@ -38,8 +40,23 @@ function onCommand(originalCmd) {
         var rendered = Mustache.render(template, world.currentLocation);
         ui.printHelpMessage(rendered);
     } else if (cmd.startsWith("i")) {
-        var template = document.querySelector('.i-template').innerHTML;
+        var template = document.querySelector('.being-template').innerHTML;
         var rendered = Mustache.render(template, world.player);
+        ui.printHelpMessage(rendered);
+    } else if (cmd.startsWith("l") || cmd.startsWith("look at")) {
+        const cmdName = ["look at", "l"].find(x => cmd.startsWith(x));
+        const args = cmd.slice(cmdName.length).trim().split(/\s+/);
+        if (!args || !args.length) {
+            ui.printHelpMessage("Выберите кого вы хотите осмотреть.");
+            return;
+        }
+        const obj = world.getObjectByListNumber(world.currentLocation, parseInt(args[0]) - 1);
+        if (!obj) {
+            ui.printHelpMessage("Выбранный объект не найден.");
+            return;
+        }
+        var template = document.querySelector('.being-template').innerHTML;
+        var rendered = Mustache.render(template, obj);
         ui.printHelpMessage(rendered);
     } else {
         for (let a of world.player.actions) {
