@@ -10,7 +10,7 @@ ui.printMessage(`Всё просто. Ваша задача увидеть со�
 
 ui.printMessage(`А сейчас вас окружили 5 здоровых крыс!
 Где? У вас дома, в подвале, откуда вы решили взять немного еды.
-Для победы просто победите их!`);
+Для победы просто избавьтесь от них!`);
 
 ui.printMessage("<hr>", false);
 
@@ -31,7 +31,12 @@ inputEl.addEventListener('keydown', e => {
  */
 function onCommand(originalCmd) {
     let cmd = originalCmd.trim().replace(/\s+/g, ' ').toLowerCase();
-    if (cmd.startsWith("?")) {
+    if (cmd.startsWith("new game") || cmd.startsWith("ng")) {
+        location.reload();
+    } else if (world.checkLose() || world.checkWin()) {
+        ui.printMessage("Вы закончили текущую игру. Чтобы начать новую наберите <b>new game</b> или <b>ng</b>.");
+        return;
+    } else if (cmd.startsWith("?")) {
         ui.printBaseHelp();
     } else if (cmd.startsWith("wia") || cmd.startsWith("wia")) {
         ui.printHelpMessage(`<i>${world.currentLocation.name}</i>`);

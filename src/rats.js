@@ -9,13 +9,13 @@ const rat1 = {
         {
             id: "hp",
             name: "Здоровье",
-            value: 67,
-            maxValue: 67,
+            value: 49,
+            maxValue: 49,
         },
         {
             id: "ad",
             name: "Урон",
-            value: 4,
+            value: 19,
         },
     ],
     actions: [
