@@ -25,6 +25,8 @@
         <b>"where i am", "wia"</b> - говорит о том где вы сейчас находитесь.
         <br><br>
         <b>"what is there", "wit"</b> - выводит список существ и предметов в текущем месте.
+        <br><br>
+        <b>"i"</b> - выводит информацию о вас.
     </div>
     <div class="what-is-there-template hiden">
         Существа:
@@ -39,6 +41,23 @@
             <li>{{name}}</li>
             {{/items}}
         </ol>
+    </div>
+    <div class="i-template hiden">
+        Характеристики:
+        <ul>
+            {{#stats}}
+            <li>{{name}}: {{value}} {{#maxValue}}/ {{maxValue}}{{/maxValue}}</li>
+            {{/stats}}
+        </ul>
+        {{#items}}
+        Что у вас есть:
+        <ol>
+            {{#items}}
+            <li>{{name}}</li>
+            {{/items}}
+        </ol>
+        {{/items}}
+        {{^items}}У вас ничего нет!{{/items}}
     </div>
     <script src="./main.js"></script>
 </body>

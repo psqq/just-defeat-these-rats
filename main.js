@@ -54,29 +54,61 @@ const basementAtHome = {
     name: "Подвал",
     beings: [
         {
+            id: "rat-1",
             name: "Крыса побольше",
         },
         {
+            id: "rat-2",
             name: "Большая крыса",
         },
         {
+            id: "rat-3",
             name: "Крыса поменьше",
         },
         {
+            id: "rat-4",
             name: "Не очень большая крыса",
         },
         {
+            id: "rat-5",
             name: "Не маленькая крыса",
         },
     ],
     items: [
         {
+            id: "food",
             name: "Еда",
         },
     ],
 };
 
 let currentLocation = basementAtHome;
+
+let player = {
+    stats: [
+        {
+            id: "hp",
+            name: "Здоровье",
+            value: 100,
+            maxValue: 100,
+        },
+        {
+            id: "ad",
+            name: "Урон",
+            value: 10,
+        },
+    ],
+    items: [
+        {
+            id: "simple-clothes",
+            name: "Простая одежда",
+        },
+    ],
+};
+
+function getStat(obj, statId) {
+    return obj.stats.filter(x => x.id == statId)[0];
+}
 
 printBaseHelp();
 
@@ -99,6 +131,10 @@ function onCommand(originalCmd) {
     } else if (cmd.startsWith("wit") || cmd.startsWith("what is there")) {
         var template = document.querySelector('.what-is-there-template').innerHTML;
         var rendered = Mustache.render(template, currentLocation);
+        printHelpMessage(rendered);
+    } else if (cmd.startsWith("i")) {
+        var template = document.querySelector('.i-template').innerHTML;
+        var rendered = Mustache.render(template, player);
         printHelpMessage(rendered);
     }
 }
