@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>My first game</title>
     <link rel="stylesheet" href="./style.css">
+    <script src="./mustache.min.js"></script>
 </head>
 
 <body>
@@ -19,7 +20,25 @@
         </div>
     </div>
     <div class="base-help hiden">
-        <b>"where i am", "wia"</b> - говорит о том где вы сейчас находитесь
+        <b>"help", "?"</b> - выводит эту справку.
+        <br><br>
+        <b>"where i am", "wia"</b> - говорит о том где вы сейчас находитесь.
+        <br><br>
+        <b>"what is there", "wit"</b> - выводит список существ и предметов в текущем месте.
+    </div>
+    <div class="what-is-there-template hiden">
+        Существа:
+        <ol class="start">
+            {{#beings}}
+            <li>{{name}}</li>
+            {{/beings}}
+        </ol>
+        Предметы:
+        <ol class="continue">
+            {{#items}}
+            <li>{{name}}</li>
+            {{/items}}
+        </ol>
     </div>
     <script src="./main.js"></script>
 </body>
