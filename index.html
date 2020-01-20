@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Just defeat these rats</title>
     <link rel="stylesheet" href="./style.css">
-    <script src="./mustache.min.js"></script>
 </head>
 
 <body>
@@ -58,8 +57,14 @@
         </ol>
         {{/items}}
         {{^items}}У вас ничего нет!{{/items}}
+        Что вы можете делать:
+        <ul>
+            {{#actions}}
+            <li>{{name}} [{{#commands}}<b>{{.}}</b>{{/commands}}]</li>
+            {{/actions}}
+        </ul>
     </div>
-    <script src="./main.js"></script>
+    <script src="./dist/main.js"></script>
 </body>
 
 </html>
