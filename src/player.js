@@ -7,6 +7,7 @@ const playerActions = [
         id: "attack-action",
         name: "Атаковать",
         commands: ["attack", "a"],
+        desc: `после команды введите номер существа по списку. Например, "a 1" или просто "a1".`,
         duration: 1,
         doIt: (...args) => {
             if (!args || !args.length) {
