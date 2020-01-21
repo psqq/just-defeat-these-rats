@@ -19,6 +19,10 @@ const playerActions = [
                 ui.printHelpMessage("Выбранный объект не найден.");
                 return;
             }
+            if (!obj.groups || !obj.groups.includes("being")) {
+                ui.printHelpMessage("Выбранный объект не может быть атакован.");
+                return;
+            }
             actions.attack(player, obj);
             world.update(1);
         },

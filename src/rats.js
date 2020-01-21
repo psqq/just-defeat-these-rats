@@ -36,6 +36,7 @@ export default [
     rat1,
     {
         id: "rat-2",
+        groups: ["being", "rat"],
         name: "Большая крыса",
         stats: [
             {
@@ -53,6 +54,7 @@ export default [
     },
     {
         id: "rat-3",
+        groups: ["being", "rat"],
         name: "Крыса поменьше",
         stats: [
             {
@@ -70,6 +72,7 @@ export default [
     },
     {
         id: "rat-4",
+        groups: ["being", "rat"],
         name: "Не очень большая крыса",
         stats: [
             {
@@ -87,6 +90,7 @@ export default [
     },
     {
         id: "rat-5",
+        groups: ["being", "rat"],
         name: "Не маленькая крыса",
         stats: [
             {

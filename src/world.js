@@ -52,12 +52,15 @@ const world = {
         } else if (i < location.beings.length) {
             return location.beings[i];
         } else if (i < location.beings.length + location.items.length) {
-            return location.beings[i - location.beings.length];
+            return location.items[i - location.beings.length];
         } else {
             return;
         }
     },
     getStat: (being, statId) => {
+        if (!being || !being.stats) {
+            return;
+        }
         return being.stats.find(x => x.id == statId);
     },
     update: dt => {
