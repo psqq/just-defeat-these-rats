@@ -11,3 +11,6 @@ export function attack(a, b) {
         world.deleteObject(b);
     }
 }
+
+export function take(a, b, n) {
+}

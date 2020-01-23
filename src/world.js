@@ -6,6 +6,7 @@ import { yellow } from "color-name";
 const locations = [
     {
         id: "basement-at-home",
+        groups: ["item", "food"],
         name: "Подвал",
         beings: [].concat(rats),
         items: [
@@ -62,6 +63,12 @@ const world = {
             return;
         }
         return being.stats.find(x => x.id == statId);
+    },
+    getItem: (being, itemId) => {
+        if (!being || !being.items) {
+            return;
+        }
+        return being.items.find(x => x.id == statId);
     },
     update: dt => {
         for (let loc of world.locations) {

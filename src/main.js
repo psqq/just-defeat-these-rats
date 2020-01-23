@@ -1,5 +1,6 @@
 import world from "./world";
 import * as ui from "./ui";
+import * as actions from "./actions";
 import Mustache from "mustache";
 
 ui.printMessage("Добро пожаловать в игру!");
@@ -63,6 +64,27 @@ function onCommand(originalCmd) {
         var template = document.querySelector('.being-template').innerHTML;
         var rendered = Mustache.render(template, obj);
         ui.printHelpMessage(rendered);
+    } else if (cmd.startsWith("t") || cmd.startsWith("take")) {
+        const cmdName = ["take", "t"].find(x => cmd.startsWith(x));
+        const args = cmd.slice(cmdName.length).trim().split(/\s+/);
+        if (!args || !args.length) {
+            ui.printHelpMessage("Выберите кого вы хотите осмотреть.");
+            return;
+        }
+        const obj = world.getObjectByListNumber(world.currentLocation, parseInt(args[0]) - 1);
+        if (!obj) {
+            ui.printHelpMessage("Выбранный объект не найден.");
+            return;
+        }
+        if (!obj.groups || !obj.groups.includes("itmes")) {
+            ui.printHelpMessage("Выбранный объект нельзя взять.");
+            return;
+        }
+        const count = 1;
+        if (args.length > 1) {
+            count = parseInt(args[1]);
+        }
+        actions.take()
     } else {
         for (let a of world.player.actions) {
             const actionCmd = a.commands.filter(x => cmd.startsWith(x))[0];
